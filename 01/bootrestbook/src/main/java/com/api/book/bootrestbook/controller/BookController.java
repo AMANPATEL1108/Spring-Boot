@@ -14,6 +14,7 @@ public class BookController {
 @Autowired
     private BookService bookService;
 
+    //get all book handler
     @GetMapping("/books")
    @ResponseBody
     public List<Book> getBooks(){
@@ -26,10 +27,28 @@ public class BookController {
 
 
     }
+    //get single book handler
 @GetMapping("/books/{id}")
     public  Book getBook(@PathVariable("id") int id){
 return  bookService.getBookById(id);
     }
+
+    // new book handler
+    @PostMapping("/books")
+     public Book addBook(@RequestBody Book book){
+         Book b=this.bookService.addBook(book);
+        System.out.println(book);
+             return  b;
+
+     }
+
+     //delete book handler
+    @DeleteMapping("/books/{bookId}")
+    public void deletebook(@PathVariable("bookId")int bookId){
+    this.bookService.deleteBook(bookId);
+    }
+
+
 
 
 
